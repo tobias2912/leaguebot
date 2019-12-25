@@ -32,7 +32,7 @@ def init(string):
                 raise AssertionError("incorrect length")
             return getCounter(words[1:])
     else:
-        return "unknown command"
+        return ""
 
 def getBuild(champ):
     originalChamp=getchampname(champ[0])
