@@ -31,6 +31,7 @@ def init(string):
             if len(words)==0:
                 raise AssertionError("incorrect length")
             return getCounter(words[1:])
+
     else:
         return ""
 
