@@ -17,7 +17,9 @@ async def on_ready():
     print(f'{client.user} has connected to Discord!')
 
 @client.event
-async def on_message(message):
+async def on_message(message: discord.Message):
+    guild: discord.Guild = message.guild
+    print(guild.roles)
     if message.author == client.user:
         return
     words = message.content.split()
@@ -32,5 +34,8 @@ async def on_message(message):
     if first in promote.commands:
         svar = promote.init(message)
         await message.channel.send(svar)
+
+
+
 
 client.run(token)
