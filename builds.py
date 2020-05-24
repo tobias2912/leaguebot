@@ -49,7 +49,7 @@ def getBuild(champ):
             items.append(item)
     string = ', '.join(items)
     if items != []:
-        return originalChamp+" build: "+string
+        return originalChamp+" build: \n`"+string+"`"
     else:
         raise AssertionError("found no items")
 
@@ -64,7 +64,7 @@ def getCounter(champ):
     items.pop(0)
     string = ', '.join(items)
     if items != []:
-        return originalChamp+" counters: "+string
+        return originalChamp+" counters:\n` "+string+"`"
     else:
         raise AssertionError("found no items")
 
