@@ -16,7 +16,8 @@ def updateChampions():
 
 updateChampions()
 
-def init(string):
+def init(message):
+    string = message.content
     words = string.split()
     command = words[0]
     if command in commands:

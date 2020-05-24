@@ -24,8 +24,9 @@ async def on_message(message: discord.Message):
         return
     words = message.content.split()
     first = words[0]
+
     if first in builds.commands:
-        svar = builds.init(message.content)
+        svar = builds.init(message)
         if svar != "":
             await message.channel.send(svar)
     if first in general.commands:
@@ -34,11 +35,10 @@ async def on_message(message: discord.Message):
     if first in promote.commands:
         svar = promote.init(message)
         await message.channel.send(svar)
+
     if first == "!help":
-    
         all_commands = "".join([str(x.commands) for x in modules])
         await message.channel.send(all_commands)
-
 
 
 
