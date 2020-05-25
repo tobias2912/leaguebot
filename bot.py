@@ -33,8 +33,9 @@ async def on_message(message: discord.Message):
         svar = general.init(message)
         await message.channel.send(svar)
     if first in promote.commands:
-        svar = promote.init(message)
-        await message.channel.send(svar)
+        svar = await promote.init(message)
+        if svar is not None and svar != "":
+            await message.channel.send(svar)
 
     if first == "!help":
         all_commands = "".join([str(x.commands) for x in modules])

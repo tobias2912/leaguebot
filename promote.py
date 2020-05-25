@@ -5,26 +5,29 @@ voted_users = []
 promoted_user = None
 votes_req = 1
 knights_id = 261940259263086592
+knights_id = 714154460695232614 #test server
 
 
-def init(message: disc.Message):
+async def init(message: disc.Message):
     if not is_knight(message.author, message.guild):
-        return "you are not knighted and have no jurisdiction!"
+        await reply(message, "you are not knighted and have no jurisdiction!")
+        return
     words = message.content.split()
     first = words[0]
     if first == "promote":
-        return promote(words, message)
+        return await promote(words, message)
     if first == "vote":
         return vote(words, message)
     raise Exception("command"+first+" not found")
 
 
-def promote(words, message):
+async def promote(words, message:disc.Message):
     global promoted_user
     global voted_users
 
     if len(words)>1:
         guild = message.guild
+        reply(message, guild.roles)
         username = words[1]
         user = guild.get_member_named(username)
         if user is None:
@@ -39,7 +42,7 @@ def promote(words, message):
         return "missing arguments"
 
 
-def vote(words, message):
+async def vote(words, message:disc.Message):
     global promoted_user
     if len(words)>1:
         guild = message.guild
@@ -56,24 +59,19 @@ def vote(words, message):
         voted_users.append(message.author)
         if len(voted_users)>= votes_req:
             add_role(guild, user)
-            reply(message, message.author.name + " has last vote for "+ user.name)
-            reply(message, username +" has been knighted!")
-            return ""
+            return (message.author.name + " has last vote for "+ user.name+", and has been knighted!")
         return message.author.name + " votes for "+ user.name     
     else:
         return "missing arguments"
 
-def reply(message, text):
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(message.channel.send(text))
-    loop.close()
+async def reply(message:disc.Message, text:str):
+    await message.channel.send(text)
 
-def add_role(guild: disc.Guild, user:disc.Member, role_id = knights_id):
+async def add_role(guild: disc.Guild, user:disc.Member, role_id = knights_id):
     role = guild.get_role(role_id)
     print("adding", role.name, "to", user.name)
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(user.add_roles(role))
-    loop.close()
+    await user.add_roles(role)
+
     
 def is_knight(user:disc.Member, guild):
     knight_role = guild.get_role(knights_id)
