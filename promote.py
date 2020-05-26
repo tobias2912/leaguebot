@@ -5,7 +5,7 @@ import random
 commands=["promote", "vote"]
 voted_users = []
 promoted_user = None
-votes_req = 1
+votes_req = 3
 knights_id = 261940259263086592
 knights_id = 714154460695232614 #test server
 
