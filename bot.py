@@ -20,6 +20,9 @@ async def on_ready():
 
 @client.event
 async def on_message(message: discord.Message):
+    """
+    based on first word, send message to correct function
+    """
     if message.author == client.user:
         return
     words = message.content.split()
