@@ -5,9 +5,9 @@ import random
 commands=["promote", "vote"]
 voted_users = []
 promoted_user = None
-votes_req = 3
+votes_req = 1
 knights_id = 261940259263086592
-#knights_id = 714154460695232614 #test server
+knights_id = 714154460695232614 #test server
 
 
 async def init(msg: disc.message):
@@ -68,7 +68,7 @@ async def vote(msg:disc.message):
             await add_role(guild, user)
             promoted_user = None
             voted_users.clear()
-            return (msg.author.name + " has last vote for "+ tag(user)+", and has been knighted!")
+            return f"{msg.author.name} has last vote for {tag(user)}, and he shall been knighted!"
         
         return get_praise(msg.author, promoted_user) + f" ({len(voted_users)}/{votes_req} votes)"     
     else:
