@@ -33,7 +33,7 @@ async def on_message(message: discord.Message):
         if svar != "":
             await message.channel.send(svar)
     if first in general.commands:
-        svar = general.init(message)
+        svar = await general.init(message)
         await message.channel.send(svar)
     if first in promote.commands:
         svar = await promote.init(message)

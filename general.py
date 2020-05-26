@@ -1,15 +1,15 @@
 import discord as disc
-import util
-commands=["highfive"]
+from util import *
+commands = ["highfive"]
 
-def init(message):
-    words = message.content.split()
-    user:disc.Member = message.guild.get_member_named(words[1])
+async def init(msg):
+    print(get_cmd(msg))
+    user:disc.Member = msg.guild.get_member_named(get_args(msg))
     if user is None:
         return "highfive who?"
-    if words[0] == "highfive":
-        if len(words)>1:
-            out = message.author.name + " high fives "+util.tag(user)+ "!"
-            return out
+    if get_cmd(msg) == "highfive":
+        out = f"{msg.author.name} high fives {tag(user)}!"
+        await msg.delete()
+        return out
     return ""
 
